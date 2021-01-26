@@ -53,8 +53,12 @@ int startProgram() {
 	case 2:
 		editAndShowList();
 		break;
+	case 3:
+		exit(0);
+		break;
 	default:
 		printf("\nInexistent option\n");
+		break;
 	}
 	return 0;
 }
@@ -63,10 +67,11 @@ int usersChoices() {
 
 	int option;
 
-	printf("**********Client Registry**********\n");
+	printf("\n**********Client Registry**********\n");
 	printf("Choose one of the options\n");
 	printf("1- Add client to list\n");
 	printf("2- Read or edit clients' list\n");
+	printf("3- Exit\n");
 	printf("Option: ");
 	scanf("%d", &option);
 
@@ -79,7 +84,8 @@ FILE *openFile (char * filename, char * mode) {
 	fp = fopen(filename, mode);
 
 	if(fp == NULL) {
-		perror("Error opening file");
+		printf("\nNo such file or directory\n");
+		usersChoices();
 	}
 
 	return fp;
@@ -91,6 +97,7 @@ int lineCounter() {
 
 	if(fp == NULL) {
 		printf("Inexistent file\n");
+		startProgram();
 	}
 
 	char ch;
@@ -111,7 +118,7 @@ int addClient() {
 	FILE *fp = openFile (FILENAME, "a");
 	int size;
 
-	printf("\nHow many clients would you like to add?\n");
+	printf("\nHow many clients would you like to add? ");
 	scanf("%d", &size);
 
 	struct Registry * clients = (struct Registry *)calloc(size, sizeof(struct Registry));
@@ -133,6 +140,52 @@ int addClient() {
 
 	printf("\nClients added successfully!\n");
 	startProgram();
+	return 0;
+}
+
+int editAndShowList() {
+
+	int option;
+
+	printf("\nChoose one of the options bellow\n");
+	printf("1- Remove client\n");
+	printf("2- Update client's expenses\n");
+	printf("3- Zero clients' expenses\n");
+	printf("4- Show best buyer\n");
+	printf("5- Show a client's expenses\n");
+	printf("6- Return to menu\n");
+	printf("7- Exit\n");
+	printf("Option: ");
+	scanf("%d", &option);
+
+	switch(option) {
+	case 1:
+		removeClient();
+		break;
+	case 2:
+		updateExpenses();
+		break;
+	case 3:
+		zeroExpenses();
+		break;
+	case 4:
+		bestBuyer();
+		break;
+	case 5:
+		clientExpenses();
+		break;
+	case 6:
+		startProgram();
+		break;
+	case 7:
+		exit(0);
+		break;
+	default:
+		printf("\nInexistent choice");
+		editAndShowList();
+		break;
+	}
+
 	return 0;
 }
 
@@ -174,7 +227,7 @@ int chooseClient() {
 		printf("%d- %s\n", i + 1, clients[i].name);
 	}
 
-	printf("Insert the client's number: ");
+	printf("\nInsert the client's number: ");
 	scanf("%d", &client);
 
 	return client;
@@ -200,6 +253,7 @@ int removeClient() {
 	fclose(fp);
 	fp = NULL;
 
+	printf("\nClient successfully removed\n");
 	editAndShowList();
 	return 0;
 }
@@ -228,6 +282,7 @@ int updateExpenses() {
 	fclose(fp);
 	fp = NULL;
 
+	printf("\nClient's expenses successfully updated\n");
 	editAndShowList();
 	return 0;
 }
@@ -293,48 +348,3 @@ int clientExpenses() {
 	return 0;
 }
 
-int editAndShowList() {
-
-	int option;
-
-	printf("Choose one of the options bellow\n");
-	printf("1- Remove client\n");
-	printf("2- Update client's expenses\n");
-	printf("3- Zero clients' expenses\n");
-	printf("4- Show best buyer\n");
-	printf("5- Show a client's expenses\n");
-	printf("6- Return to menu\n");
-	printf("7- Exit\n");
-	printf("Option: ");
-	scanf("%d", &option);
-
-	switch(option) {
-	case 1:
-		removeClient();
-		break;
-	case 2:
-		updateExpenses();
-		break;
-	case 3:
-		zeroExpenses();
-		break;
-	case 4:
-		bestBuyer();
-		break;
-	case 5:
-		clientExpenses();
-		break;
-	case 6:
-		startProgram();
-		break;
-	case 7:
-		exit(0);
-		break;
-	default:
-		printf("\nInexistent choice");
-		editAndShowList();
-		break;
-	}
-
-	return 0;
-}
