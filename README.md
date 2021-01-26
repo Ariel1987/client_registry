@@ -40,25 +40,25 @@ When the user first compile and run the program, a few options will be given:
 Pressing "1" adds a client. The user will get to choose how many clients to add and be prompted the information required (name, birth year, expenses). 
 The file will automatically be created. And return to the main menu.
 
-![](prints-for-git/print3.png)
+![](prints/print1.png)
 
 If the user presses "2" he will be taken to a secondary menu. However, if the file doesn't exist, any of the options he chooses will take to a warning message and return to the menu.
 
-![](prints-for-git/print2.png)
+![](prints/print2.png)
 
 If there is already a file, the user can choose what to edit or list the file, being taken to a secondary menu
 
-![](prints-for-git/print4.png)
+![](prints/print3.png)
 
 The first option will simply is to remove a specific client. The user will be prompted to choose will client he wants to remove. 
 After removing, the program returns to the main menu.
 
-
+![](prints/print4.png)
 
 The second option is to update a certain client's expenses. The user will be again prompted to choose a client and to give the new value. 
 After displaying it, the program returns to the main menu 
 
-![](prints-for-git/print5.png)
+![](prints/print5.png)
 
 The third option will zero all expenses from every client and return to the menu.
 
